@@ -58,12 +58,13 @@ if(isset($_POST['item_name']))
     <label for="available" >Available</label>
         <select name="available" class="form-select">
             <option value="yes">Yes</option>
-            <option value="no" <?=($info['available']=='no')?'selected':'';?>>No</option>
+            <option value="no" <?= ($info['available'] ?? '') =='no' ? 'selected' : ''; ?>>No</option>
+
         </select>
     </div>
 
     <div class="mb-3" >
-        <button class="btn btn-success" value="submit" style="margin-left: 500px;"><?= $uid?"Update":'Save'?></button>
+        <button class="btn btn-success" value="submit" style="margin-left: 650px;"><?= $uid?"Update":'Save'?></button>
     </div>
 
 </form>
