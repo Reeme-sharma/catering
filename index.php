@@ -1,5 +1,6 @@
 <?php
-
+require_once "helper/Session.php";
+Session::init();
 define('ROOT','http://localhost/batch7am_2024/catering/');
 require_once "helper/redirect.php";
 require_once "helper/library.php";

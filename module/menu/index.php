@@ -1,15 +1,22 @@
 <?php
-
 $data = DB('menu')->get_all();
 if(isset($_POST['del']))
 {
     $delid=implode(',',$_POST['del']);
     DB('menu')->delete($delid);
+    Session::set('get_data',"data deleted successfully");
     redirect('menu');
+    exit;
 }
 // print_r($data);            
 ?>
-
+<?php
+if( $msg=Session::get('get_data')){
+?>
+<div class="alert alert-success text-center h3"><?=$msg;?></div>
+<?php
+Session::delete('get_data');
+}?>
 <div><a href="<?=ROOT;?>menu/menuform" class="btn btn-primary">Add Item</a></div>
 
 <form method="post">
