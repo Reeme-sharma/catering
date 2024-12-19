@@ -1,5 +1,5 @@
 <?php
-
+islogin();
 $obj=DB('menu');
 if($uid)
 {

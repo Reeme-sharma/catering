@@ -41,6 +41,13 @@ function DB($table,$pk='id')   //optional parameter (pk)
             $sql= "select $cols from $this->table order by $order";
             return $this->query($sql)?->fetch_all(MYSQLI_ASSOC);           // (?->)agar query nhi chalti hai to ye ise aage line ko chlne nhi deta                  
         }
+
+        public function db_get($sql,$fetch=1)
+        {
+            if($fetch)
+            return $this->query($sql)?->fetch_all(MYSQLI_ASSOC);
+            return $this->query($sql)?->fetch_assoc();
+        }
          
         public function find($id,$cols="*")
         {

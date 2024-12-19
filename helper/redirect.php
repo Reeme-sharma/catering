@@ -6,4 +6,13 @@ function redirect($path)
     header("location:$path"); // Sends a Location header to redirect the user
 }
 
+function islogin()
+{
+    if(!Session::get('logindtl'))
+    {
+        redirect('user');
+        exit;
+    }
+}
+
 ?>

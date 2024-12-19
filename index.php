@@ -2,9 +2,11 @@
 require_once "helper/Session.php";
 Session::init();
 define('ROOT','http://localhost/batch7am_2024/catering/');
+define('BNO',2);
+define('TIME',10);
 require_once "helper/redirect.php";
 require_once "helper/library.php";
-$module="booking";
+$module="user";
 $file="index";
 $uid=null;
 $url=$_GET['url']??null; // menu/index.php

@@ -3,8 +3,40 @@ html,body{
         margin: 0;
     }
 
+    label{
+        font-weight:600;
+    }
+
     .main{
         height: 100%;
         display: grid;
         grid-template-rows: 100px 1fr 30px;        
+    }
+    .pagetitle{
+        padding: 5px;
+        text-align:center;
+        font-size:2em;
+        font-weight:bold;
+        color:rgb(104, 104, 184);
+        text-shadow: 2px 1px 3px #000;
+        border-bottom: 1px solid rgb(193, 220, 226);
+        margin-bottom: 5px;
+        width: 280px;
+        border-top: transparent;
+        border-right: transparent;
+        border-top: transparent;
+        border-left: transparent;
+        margin-left: 200px;
+    }
+    /* .pagetittle > span {
+        color:#017f35;
+    } */
+    .cont
+    {
+        margin-top: 10px;
+        padding: 20px;
+        width: 58%;
+        margin: 10px auto;
+        box-shadow: 1px 1px 5px rgb(51, 79, 156);
+        border-radius: 7px;
     }
