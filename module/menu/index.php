@@ -34,6 +34,7 @@ Session::delete('get_data');
             <th>S.No</th>
             <th><input type="checkbox" id="all" onclick="checkdel(this)"><label for="all">All</label></th>
             <th>Item</th>
+            <th>Image</th>
             <th style="text-align: center;">Description</th>
             <th>Category</th>
             <th>Available</th>
@@ -52,6 +53,13 @@ Session::delete('get_data');
            <td><input type="checkbox" name="del[]" onclick="displaybtn()" class="delc" value="<?= $info['id']; ?>"></td>
            <td><a href="<?=ROOT;?>menu/menuform/<?=$info['id'];?>" title="click for edit"> 
             <?= $info['item_name']; ?></a></td>
+            <td><?php if($info['picture'])
+            {?>
+            <img src="<?=ROOT.'public/images/'.$info['picture'];?>" height="120px">
+            <?php } else
+            {
+                echo "<span class='text-muted'>N/A</span>";
+            }?></td>
             <td><?= $info['description']; ?></td>
             <td><?= $info['category']; ?></td>
             <td><?= $info['available']; ?></td>

@@ -4,14 +4,34 @@ $obj=DB('menu');
 if($uid)
 {
     $info = $obj->find($uid);
+    $picture=$info['picture'];
 }
 if(isset($_POST['item_name']))
 {
+    $valid=1;
+    if($_FILES['picture']['error']==0)
+    {
+         if('image'==substr($_FILES['picture']['type'],0,strpos($_FILES['picture']['type'],'/')))
+         {
+            //also validate the size of image
+            if(isset($picture))
+                unlink("public/images/$picture");
+            $picture=time()."_".$_FILES['picture']['name'];
+            move_uploaded_file($_FILES['picture']['tmp_name'],'public/images/'.$picture);
+         }
+         else{
+                $valid=0;
+                $err="File type is not image type!";
+         }
+    }
+    if($valid)
+    {
     $info=[
           'item_name'=>$_POST['item_name'],             //user cant create col for own..they have to follow those col which i will pass to the database through these steps.
           'description'=>$_POST['description'],
           'category'=>($_POST['category']) ? implode(',', $_POST['category']) : '',
-          'available'=>$_POST['available']
+          'available'=>$_POST['available'],
+          'picture'=>$picture
     ];
 
 // $_POST['category']=implode(',',$_POST['category']);
@@ -22,16 +42,21 @@ if(isset($_POST['item_name']))
    }
    else
    {
-    echo "something went wrong!";
- 
+    $err="something went wrong!";
+      }
+    }
 }
-}  
-
 ?>
 <div class="alert alert-primary h4 text-center">
-   Item <?= $uid?"Edit":'Add'?> Form
+   Item <?= $uid ? "Edit":'Add'?> Form
 </div>
-<form action="" method="post">
+
+<?php 
+if(isset($err))
+{?>
+<div class="alert alert-secondary" style="color:red;"><?=$err;?></div>
+<?php } ?>
+<form action="" method="post" enctype="multipart/form-data">
     <div class="mb-3">
     <label for="item_name">Item name</label>
         <input type="text" name="item_name" id="item_name" placeholder="enter a name" required class="form-control" value="<?=$info['item_name']??'';?>">
@@ -60,9 +85,21 @@ if(isset($_POST['item_name']))
         <select name="available" class="form-select">
             <option value="yes">Yes</option>
             <option value="no" <?= ($info['available'] ?? '') =='no' ? 'selected' : ''; ?>>No</option>
-
-        </select>
+       </select>
     </div>
+  <?php
+  if(isset($picture))
+  {?>
+    <div class="mb-3">
+  <label for="pic" class="form-label">Uploaded picture</label>
+  <div class="form-control"><img src="<?=ROOT.'public/images/'.$picture;?>" height="150px"></div>
+</div>
+  <?php }
+  ?>
+    <div class="mb-3">
+  <label for="pic" class="form-label">Upload picture</label>
+  <input class="form-control form-control-sm" id="pic" type="file" name="picture" accept="image/*">
+</div>
 
     <div class="mb-3" >
         <button class="btn btn-success" value="submit" style="margin-left: 650px;"><?= $uid?"Update":'Save'?></button>
