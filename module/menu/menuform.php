@@ -31,6 +31,7 @@ if(isset($_POST['item_name']))
           'description'=>$_POST['description'],
           'category'=>($_POST['category']) ? implode(',', $_POST['category']) : '',
           'available'=>$_POST['available'],
+          'price'=>$_POST['price'],
           'picture'=>$picture
     ];
 
@@ -48,7 +49,7 @@ if(isset($_POST['item_name']))
 }
 ?>
 <div class="alert alert-primary h4 text-center">
-   Item <?= $uid ? "Edit":'Add'?> Form
+   <?= $uid ? "Edit":'Add'?> Item Form
 </div>
 
 <?php 
@@ -78,6 +79,11 @@ if(isset($err))
         <option value="beverage" <?=(in_array('beverage',$new))?'selected':'';?>>Beverage</option>
         <option value="dessert" <?=(in_array('dessert',$new))?'selected':'';?>>Dessert</option>
         </select>
+       </div>
+
+       <div class="mb-3">
+       <label for="price">Price</label>
+        <input type="number" class="form-control" placeholder="Enter price" required name="price" id="price" value="<?=$info['price']?>">
        </div>
 
        <div class="mb-3">

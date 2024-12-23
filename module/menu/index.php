@@ -1,10 +1,15 @@
 <?php
 islogin();
-$data = DB('menu')->get_all();
+$dbobj=DB('menu');
+$data=$dbobj->get_all();
 if(isset($_POST['del']))
 {
     $delid=implode(",",$_POST['del']);
-    DB('menu')->delete($delid);
+    foreach($_POST['del'] as $did){
+        if($pn=$dbobj->find($did,'picture')['picture'])
+        unlink("public/images.$pn");
+    }
+    $dbobj->delete($delid);
     Session::set('get_data',"data deleted successfully"); 
     redirect('menu');
     exit;
@@ -34,7 +39,8 @@ Session::delete('get_data');
             <th>S.No</th>
             <th><input type="checkbox" id="all" onclick="checkdel(this)"><label for="all">All</label></th>
             <th>Item</th>
-            <th>Image</th>
+            <!-- <th>Image</th> -->
+             <th>Price</th>
             <th style="text-align: center;">Description</th>
             <th>Category</th>
             <th>Available</th>
@@ -53,14 +59,15 @@ Session::delete('get_data');
            <td><input type="checkbox" name="del[]" onclick="displaybtn()" class="delc" value="<?= $info['id']; ?>"></td>
            <td><a href="<?=ROOT;?>menu/menuform/<?=$info['id'];?>" title="click for edit"> 
             <?= $info['item_name']; ?></a></td>
-            <td><?php if($info['picture'])
-            {?>
-            <img src="<?=ROOT.'public/images/'.$info['picture'];?>" height="120px">
-            <?php } else
-            {
+            <!-- <td><php { if($info['picture'])
+            { ?>
+            <img src="<=ROOT.'public/images/'.$info['picture'];?>" height="120px">
+            <php }?> else
+            <php { ?>
                 echo "<span class='text-muted'>N/A</span>";
-            }?></td>
-            <td><?= $info['description']; ?></td>
+            <php }?></td> -->
+            <td><?=$info['price']?$info['price']:"N/E";?></td>
+           <td><?= $info['description']; ?></td>
             <td><?= $info['category']; ?></td>
             <td><?= $info['available']; ?></td>
             <td><?= date('d-M-Y h:i A', strtotime($info['created_at'])); ?></td>

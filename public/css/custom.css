@@ -40,3 +40,30 @@ html,body{
         box-shadow: 1px 1px 5px rgb(51, 79, 156);
         border-radius: 7px;
     }
+
+    
+    /* .product-card {
+      transition: transform 0.3s, box-shadow 0.3s;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+     }
+    .product-card:hover {
+      transform: scale(1.05);
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    }
+    .product-image {
+      height: 200px;
+      object-fit: cover;
+      border-bottom: 1px solid #ddd;
+    }
+    .product-title {
+      font-weight: bold;
+      font-size: 1.2rem;
+      
+    } */
+
+
+
+   
+  
